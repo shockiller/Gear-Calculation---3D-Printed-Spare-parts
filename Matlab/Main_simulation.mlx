@@ -1,0 +1,23 @@
+Main Simulation
+
+This script is the main file for the gear design simulation. The gear design is adjusted for the purpose of 3D printing and therefore only materials which are possible to print with FDM technique are included. For setting up inputs for the calculation please use script "Inputs.m" and for adition of materials which are not included please use script "Materials.m". Also, gear this script is ment to be used for design of gears as a spare part application and for that reason the inputs are geometrical limitations and properties of the motor/machine.
+The calculations depends highly on the accuracy grade which is achiavable by specific printer or by secondary process. Please read remarks in the calculations.m script and adjust the code accordingly (line 129, 174 and 195). Similarly check line 191 and adjust the coefficient for lubrication (this may cause all a very small error).
+This script was originaly developed for a helical gear calculations, some of the calculations would need to be adjusted in the "calculations.m" for obtaining the results for straight gears (dimensions calculation d_xx). However, most of the calculations would remain the same, and also in most of the power tools, mixers, etc.. we can find Helical gear due to higher speeds in these products. 
+The final result which is obtained by this script is a table "calculations.AfterSafAndGeoCheck" which shows the possible combinations of materials, number of teeth, etc... which passed the safety requirements specified in the "parameter.m" and geometrical limitations specified in the "inputs.m". Note that the outcome of this script is only a theoretical design of 3D printed gears as spare part, there are still some coeficients, etc, which need to be experimentally tested (e.g. Roughness or temperature properties of some materials which does not have that information online e.g. Iglidur and others). When those are available, the temperature check section will also include other materials, so far some materials cannot be checked due to the missing properties.
+Moreover, this algorithm is a part of Master Thesis conducted at KU Leuven University by Jakub Podzimek in 2020/2021 academic year. Feel free to use this script for your needs and update it however, you want. If you have any questions you can contact me on: kuba.podzimek@gmail.com
+
+clc
+close all
+clear all
+
+%% Define calculation inputs:
+inputs = Inputs();
+
+%% Define material inputs:
+materials = Materials();
+
+%% Call function for the calculations
+calculations = Calculations(inputs, Parameters, materials);
+
+
+
